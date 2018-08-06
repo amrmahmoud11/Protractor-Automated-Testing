@@ -11,7 +11,6 @@ var homepage = function() {
       signUpUsername.sendKeys(username);
       signUpPassword.sendKeys(password);
 
-
   };
 
   this.getTextOfUser = function(){

@@ -10,14 +10,21 @@ var {Then} = require('cucumber');
 var {And} = require('cucumber');
 var {setDefaultTimeout} = require('cucumber');
 setDefaultTimeout(600 * 1000);
+var {After, Before, AfterAll, BeforeAll} = require('cucumber');
+
+      Before(function () {
+      browser.get('http://www.netflix.com/');
+      });
+
+      After(function () {
+        browser.close();
+        });
 
       Given('I click sign in on the homepage', function () {
-        browser.get('http://www.netflix.com/');
         expect(browser.getCurrentUrl()).to.eventually.equal('https://www.netflix.com/eg-en/');
         homepage.clickSignIn();
-        browser.sleep(5000);
+        browser.sleep(2000);
         return expect(browser.getCurrentUrl()).to.eventually.equal('https://www.netflix.com/eg-en/login');
-
 
         });
 
@@ -29,7 +36,6 @@ setDefaultTimeout(600 * 1000);
          });
 
       Then('I click sign in', function(){
-        browser.sleep(5000);
         return homepage.clickSignIn2();
 
       });
