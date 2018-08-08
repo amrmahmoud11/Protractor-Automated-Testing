@@ -17,11 +17,22 @@ var config = exports.config = {
   specs: ['Cucumber Features/FirstScenario.feature'],
 
   cucumberOpts: {
-    require: ['step_definitions/HomePageSteps.js']
+    require: ['step_definitions/HomePageSteps.js'],
+    format: 'json:.tmp/results.json',
+       strict: true
     // tags: false,
     // profile: false,
     // 'no-source': true
-  }
+  },
+
+  plugins: [{
+    package: require.resolve('protractor-multiple-cucumber-html-reporter-plugin'),
+       options:{
+           // read the options part
+           automaticallyGenerateReport: true,
+           removeExistingJsonReportFile: true
+       }
+   }]
 
 
   };

@@ -10,15 +10,23 @@ var {Then} = require('cucumber');
 var {And} = require('cucumber');
 var {setDefaultTimeout} = require('cucumber');
 setDefaultTimeout(600 * 1000);
-var {After, Before, AfterAll, BeforeAll} = require('cucumber');
+var {After, Before, AfterAll, BeforeAll, Status} = require('cucumber');
 
       Before(function () {
-      browser.get('http://www.netflix.com/');
+        browser.get('http://www.netflix.com/');
       });
 
-      After(function () {
+
+      After(function(scenario) {
+        if (scenario.result.status === Status.FAILED) {
+          var attach = this.attach;
+              return browser.takeScreenshot().then(function(png) {
+          var decodedImage = new Buffer(png, "base64");
+              return attach(decodedImage, "image/png");
+          });
+          }
         browser.close();
-        });
+      });
 
       Given('I click sign in on the homepage', function () {
         expect(browser.getCurrentUrl()).to.eventually.equal('https://www.netflix.com/eg-en/');
@@ -41,6 +49,7 @@ var {After, Before, AfterAll, BeforeAll} = require('cucumber');
       });
 
       Then('It should say incorrect login', function(){
+        browser.sleep(2000);
         return  expect(homepage.isElementAvailable()).to.be.eventually.true;
       });
 
