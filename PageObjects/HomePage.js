@@ -1,6 +1,7 @@
 var homepage = function() {
-  var signUpUsername = element(by.name('userLoginId'));
+  var signUpUsername = element(by.name('usrLoginId'));
   var signUpPassword = element(by.name('password'));
+  browser.ignoreUncaughtExceptions = true;
 
 
   this.clickSignIn = function() {
@@ -8,9 +9,9 @@ var homepage = function() {
   };
 
   this.enterEmailOrPhoneNumber = function(username, password){
+
       signUpUsername.sendKeys(username);
       signUpPassword.sendKeys(password);
-
   };
 
   this.getTextOfUser = function(){

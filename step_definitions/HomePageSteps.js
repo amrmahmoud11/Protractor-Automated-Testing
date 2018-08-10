@@ -4,6 +4,7 @@ chai.use(chaiAsPromised);
 var expect = chai.expect;
 var homepage = require('../PageObjects/HomePage.js');
 browser.ignoreSynchronization = true;
+browser.ignoreUncaughtExceptions = true;
 var {Given} = require('cucumber');
 var {When} = require('cucumber');
 var {Then} = require('cucumber');

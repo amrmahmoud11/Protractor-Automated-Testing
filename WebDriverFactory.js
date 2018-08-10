@@ -9,17 +9,18 @@ var config = exports.config = {
   frameworkPath: require.resolve('protractor-cucumber-framework'),
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
   },
 
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: ['Cucumber Features/FirstScenario.feature'],
+          ignoreUncaughtExceptions: true,
 
   cucumberOpts: {
     require: ['step_definitions/HomePageSteps.js'],
     format: 'json:.tmp/results.json',
-       strict: true
+       strict: true,
     // tags: false,
     // profile: false,
     // 'no-source': true
@@ -30,7 +31,7 @@ var config = exports.config = {
        options:{
            // read the options part
            automaticallyGenerateReport: true,
-           removeExistingJsonReportFile: true
+           removeExistingJsonReportFile: true,
        }
    }]
 
